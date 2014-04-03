@@ -1,32 +1,28 @@
 //
-//  ViewController.m
+//  ActivitiesView.m
 //  DatabaseReader
 //
 //  Created by Taveras, Helson on 3/4/14.
 //  Copyright (c) 2014 Taveras, Helson. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ActivitiesView.h"
 #import "Activity.h"
 
-@interface ViewController ()
+@interface ActivitiesView ()
 
 @end
 
-@implementation ViewController
+@implementation ActivitiesView
 
-@synthesize label, objectReturnedFromJSON, table;
-
-- (void)viewDidLoad
+//http://www.appcoda.com/fetch-parse-json-ios-programming-tutorial/ 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 - (void) printURL {
     NSLog(@"Getting from URL...");
@@ -48,11 +44,12 @@
         NSLog(@"URL:,%@", stringFromFileAtURL);
         
     }
-
 }
-- (IBAction)onButtonPress:(id)sender {
+- (void)viewDidLoad
+{
+    
     [self printURL];
-  //  Activity *activity = [[Activity alloc] init];
+    Activity *activity = [[Activity alloc] init];
     NSMutableArray *jsonArray = [[NSMutableArray alloc] init];
     
     // URL of the activities
@@ -82,14 +79,18 @@
     NSLog(@"Number of activities: %i", [activityDic count]);
     NSLog(@"Description: %@", [activityDic description]);
     
-    NSString *holdString = [NSString stringWithFormat:@"Object: %@", [activityDic objectForKey:@"1"]];
-    NSLog(@"EventName: %@", holdString);
-    
     for(NSDictionary *activities in activityDic){
         NSString *holdString = [NSString stringWithFormat:@"%@", [activityDic objectForKey:@"eventName"]];
         NSLog(@"EventName: %@", holdString);
         [jsonArray addObject:holdString];
     }
-    NSLog(@"jsonArray: %@", jsonArray);
+    NSLog(@"jsonArray: %@", jsonArray);    
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 @end
